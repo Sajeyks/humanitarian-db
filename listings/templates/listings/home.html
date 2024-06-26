@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humanitarian Database</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .nav-pills .nav-link.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Humanitarian Database</h1>
+        
+        <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-soldiers-tab" data-bs-toggle="pill" data-bs-target="#pills-soldiers" type="button" role="tab" aria-controls="pills-soldiers" aria-selected="true">Fallen Soldiers</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-arrested-tab" data-bs-toggle="pill" data-bs-target="#pills-arrested" type="button" role="tab" aria-controls="pills-arrested" aria-selected="false">Arrested People</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-missing-tab" data-bs-toggle="pill" data-bs-target="#pills-missing" type="button" role="tab" aria-controls="pills-missing" aria-selected="false">Missing People</button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-soldiers" role="tabpanel" aria-labelledby="pills-soldiers-tab">
+                <h2>Fallen Soldiers</h2>
+                <ul class="list-group">
+                    {% for soldier in fallen_soldiers %}
+                    <li class="list-group-item">
+                        <h5>{{ soldier.name }}</h5>
+                        <p>Reason of death: {{ soldier.reason_of_death }}</p>
+                        <p>Place killed: {{ soldier.place_killed }}</p>
+                        <p>Date: {{ soldier.date }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="tab-pane fade" id="pills-arrested" role="tabpanel" aria-labelledby="pills-arrested-tab">
+                <h2>Arrested People</h2>
+                <ul class="list-group">
+                    {% for person in arrested_people %}
+                    <li class="list-group-item">
+                        <h5>{{ person.name }}</h5>
+                        <p>Police station: {{ person.police_station }}</p>
+                        <p>Has representation: {% if person.has_representation %}Yes{% else %}No{% endif %}</p>
+                        <p>Date: {{ person.date }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="tab-pane fade" id="pills-missing" role="tabpanel" aria-labelledby="pills-missing-tab">
+                <h2>Missing People</h2>
+                <ul class="list-group">
+                    {% for person in missing_people %}
+                    <li class="list-group-item">
+                        <h5>{{ person.name }}</h5>
+                        <p>Time of missing: {{ person.time_of_missing }}</p>
+                        <p>Status: {% if person.found %}Found on {{ person.date_found }}{% else %}Still missing{% endif %}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
