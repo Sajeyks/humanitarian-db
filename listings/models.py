@@ -7,14 +7,23 @@ class FallenSoldier(models.Model):
     location = models.CharField(max_length=100)
     date = models.DateField()
 
+    def __str__(self):
+        return self.name
+
 class ArrestedPerson(models.Model):
     name = models.CharField(max_length=100)
     police_station = models.CharField(max_length=100)
     has_representation = models.BooleanField(default=False)
     date = models.DateField()
 
+    def __str__(self):
+        return self.name
+
 class MissingPerson(models.Model):
     name = models.CharField(max_length=100)
     time_of_missing = models.DateTimeField()
     found = models.BooleanField(default=False)
     date_found = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
