@@ -22,20 +22,23 @@
                 <ol class="list-group list-group-numbered">
                     {% for person in missing_people %}
                     <li class="list-group-item searchable {% if person.found %}found{% endif %}" data-name="{{ person.name }}">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="date-box">{{ person.time_of_missing|date:"M d, Y H:i" }}</div>
-                                <h5>{{ person.name }}</h5>
-                                <span class="tag {% if person.found %}tag-found{% else %}tag-missing{% endif %}">
-                                    {% if person.found %}Found{% else %}Missing{% endif %}
-                                </span>
-                                {% if person.found %}
-                                <p>Found on: <span class="date-box">{{ person.date_found|date:"M d, Y" }}</span></p>
-                                {% endif %}
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1 me-3">
+                                <div class="person-details">
+                                    <div class="date-box">{{ person.time_of_missing|date:"M d, Y H:i" }}</div>
+                                    <h5>{{ person.name }}</h5>
+                                    <p>Family Contact: {{ person.contact }}</p>
+                                    <span class="tag {% if person.found %}tag-found{% else %}tag-missing{% endif %}">
+                                        {% if person.found %}Found{% else %}Missing{% endif %}
+                                    </span>
+                                    {% if person.found %}
+                                    <p>Found on: <span class="date-box">{{ person.date_found|date:"M d, Y" }}</span></p>
+                                    {% endif %}
+                                </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="flex-shrink-0">
                                 {% if person.photo %}
-                                <img src="{{ person.photo.url }}" alt="{{ person.name }}" class="img-fluid person-photo" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="{{ person.photo.url }}">
+                                <img src="{{ person.photo.url }}" alt="{{ person.name }}" class="person-photo" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="{{ person.photo.url }}">
                                 {% endif %}
                             </div>
                         </div>
