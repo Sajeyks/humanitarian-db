@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h1 class="text-center mb-4">Humanitarian Database</h1>
+        <h1 class="text-center mb-4">Maandamano Missing Persons Database</h1>
         
         <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by name or place...">
         
@@ -27,59 +27,6 @@
                 <button class="nav-link" id="pills-missing-tab" data-bs-toggle="pill" data-bs-target="#pills-missing" type="button" role="tab" aria-controls="pills-missing" aria-selected="false">Missing People</button>
             </li>
         </ul>
-        
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-soldiers" role="tabpanel" aria-labelledby="pills-soldiers-tab">
-                <h2>Fallen Soldiers</h2>
-                <ol class="list-group list-group-numbered">
-                    {% for soldier in fallen_soldiers %}
-                    <li class="list-group-item searchable" data-name="{{ soldier.name }}" data-place="{{ soldier.place_killed }}">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="date-box">{{ soldier.date|date:"M d, Y" }}</div>
-                                <h5>{{ soldier.name }}</h5>
-                                <p>Reason of death: {{ soldier.reason_of_death }}</p>
-                                <p>Place killed: {{ soldier.place_killed }}</p>
-                            </div>
-                            <div class="col-md-3">
-                                {% if soldier.photo %}
-                                <img src="{{ soldier.photo.url }}" alt="{{ soldier.name }}" class="person-photo" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="{{ soldier.photo.url }}">
-                                {% endif %}
-                            </div>
-                        </div>
-                    </li>
-                    {% empty %}
-                    <li class="list-group-item">No fallen soldiers recorded.</li>
-                    {% endfor %}
-                </ol>
-            </div>
-            
-            <div class="tab-pane fade" id="pills-arrested" role="tabpanel" aria-labelledby="pills-arrested-tab">
-                <h2>Arrested People</h2>
-                <ol class="list-group list-group-numbered">
-                    {% for person in arrested_people %}
-                    <li class="list-group-item searchable" data-name="{{ person.name }}" data-place="{{ person.police_station }}">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="date-box">{{ person.date|date:"M d, Y" }}</div>
-                                <h5>{{ person.name }}</h5>
-                                <p>Police station: {{ person.police_station }}</p>
-                                <span class="tag {% if person.has_representation %}tag-represented{% else %}tag-not-represented{% endif %}">
-                                    {% if person.has_representation %}Represented{% else %}Not Represented{% endif %}
-                                </span>
-                            </div>
-                            <div class="col-md-3">
-                                {% if person.photo %}
-                                <img src="{{ person.photo.url }}" alt="{{ person.name }}" class="person-photo" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="{{ person.photo.url }}">
-                                {% endif %}
-                            </div>
-                        </div>
-                    </li>
-                    {% empty %}
-                    <li class="list-group-item">No arrested people recorded.</li>
-                    {% endfor %}
-                </ol>
-            </div>
             
             <div class="tab-pane fade" id="pills-missing" role="tabpanel" aria-labelledby="pills-missing-tab">
                 <h2>Missing People</h2>
