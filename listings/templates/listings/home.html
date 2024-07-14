@@ -25,12 +25,13 @@
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1 me-3">
                                 <div class="person-details">
-                                    <div class="date-box">{{ person.time_of_missing|date:"M d, Y H:i" }}</div>
+                                    <!-- <div class="date-box">{{ person.time_of_missing|date:"M d, Y H:i" }}</div> -->
                                     <h5>{{ person.name }}</h5>
                                     <p>Family Contact: {{ person.contact }}</p>
                                     <span class="tag {% if person.found %}tag-found{% else %}tag-missing{% endif %}">
                                         {% if person.found %}Found{% else %}Missing{% endif %}
                                     </span>
+                                    <div class="date-box">{{ person.time_of_missing|date:"M d, Y H:i" }}</div>
                                     {% if person.found %}
                                     <p>Found on: <span class="date-box">{{ person.date_found|date:"M d, Y" }}</span></p>
                                     {% endif %}
