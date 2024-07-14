@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 load_dotenv(find_dotenv())
 
@@ -149,5 +152,6 @@ CLOUDINARY_STORAGE = {
     'API_KEY': os.environ['API_KEY'],
     'API_SECRET': os.environ['API_SECRET'],
 }
+
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
