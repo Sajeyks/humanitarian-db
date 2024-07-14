@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 from cloudinary.models import CloudinaryField
 
 # class FallenSoldier(models.Model):
@@ -36,10 +38,12 @@ class MissingPerson(models.Model):
     time_of_missing = models.DateTimeField()
     found = models.BooleanField(default=False)
     date_found = models.DateField(null=True, blank=True)
-    
-    photo = CloudinaryField('image', transformation={
-        'width': 400, 'height': 300, 'crop': 'limit', 'quality': 'auto:good'
-    })
+    photo =ProcessedImageField(upload_to='avatars',
+                                 processors=[ResizeToFill(400, 400)],
+                                 format='JPEG',
+                                 options={'quality': 90},
+                                 blank=True,
+                                 null=True)
 
     # def image_tag(self):
     #     return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.photo))
